@@ -9,18 +9,79 @@
 <body>
 	<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSea6a1NKX9cWEuB-HPmfiwG_lYa-OqeB26G_7HTKXTqIEpo6Q/viewform">Enter more data.</a></p>
 
-	<div style="max-width: 400px">
-
-	<canvas id="myChart" width="200" height="200"></canvas>
 	<script>
+
+	var JSONURL = 'https://spreadsheets.google.com/feeds/list/1CVtxktOSZxUmDCR8zEdGA5xEdNpB2sK2MtSXC-JIdOU/1/public/basic?alt=json';
+
+	var leadsources = [];
+	var xaxis = [];
+
+	function getCount(nameKey){
+	    for (var i=0; i < leadsources.length; i++) {
+	        if (leadsources[i].name === nameKey) {
+	            return leadsources[i].count;
+	        }
+	    }
+	}
+
+	function addLeadSource(nameKey){
+    	leadsources.push({name: nameKey, count: 1});
+	}
+
+	function searchAndIncrementOrAdd(nameKey){
+	    for (var i=0; i < leadsources.length; i++) {
+	        if (leadsources[i].name === nameKey) {
+	        	leadsources[i].count++;
+	            return true;
+	        }
+	    }
+	    addLeadSource(nameKey);
+	    xaxis.push(nameKey);
+	}
+
+	function callback(data){
+	    var rows = [];
+	    var cells = data.feed.entry;
+	    
+	    for (var i = 0; i < cells.length; i++){
+	        var rowObj = {};
+	        rowObj.timestamp = cells[i].title.$t;
+	        var rowCols = cells[i].content.$t.split(',');
+	        for (var j = 0; j < rowCols.length; j++){
+	            var keyVal = rowCols[j].split(':');
+	            rowObj[keyVal[0].trim()] = keyVal[1].trim();
+	        }
+	        rows.push(rowObj);
+
+	        searchAndIncrementOrAdd(rowObj.leadsource);
+	    }
+	    
+	    var raw = document.createElement('p');
+	    raw.innerText = JSON.stringify(rows);
+	    document.body.appendChild(raw);
+
+	    console.log(leadsources);
+	}
+
+	$(document).ready(function(){
+	    
+	    $.ajax({
+	        url:JSONURL,
+	        success: function(data){
+	            callback(data);
+	        }
+	    });
+
+	});
+
 	var ctx = document.getElementById("myChart");
 	var myChart = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	        labels: xaxis,
 	        datasets: [{
 	            label: '# of Votes',
-	            data: [12, 19, 3, 5, 2, 3],
+	            data: [12, 19, 3],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',
@@ -53,66 +114,6 @@
 	});
 	</script>
 
-	</div>
-
-	<script>
-
-	var JSONURL = 'https://spreadsheets.google.com/feeds/list/1CVtxktOSZxUmDCR8zEdGA5xEdNpB2sK2MtSXC-JIdOU/1/public/basic?alt=json';
-
-	var leadsources = [];
-
-	function addLeadSource(nameKey){
-    	leadsources.push({name: nameKey, count: 1});
-	}
-
-	function searchAndIncrementOrAdd(nameKey){
-	    for (var i=0; i < leadsources.length; i++) {
-	        if (leadsources[i].name === nameKey) {
-	        	leadsources[i].count++;
-	            return true;
-	        }
-	    }
-	    addLeadSource(nameKey);
-	}
-
-	function callback(data){
-	    var rows = [];
-	    var cells = data.feed.entry;
-	    
-	    for (var i = 0; i < cells.length; i++){
-	        var rowObj = {};
-	        rowObj.timestamp = cells[i].title.$t;
-	        var rowCols = cells[i].content.$t.split(',');
-	        for (var j = 0; j < rowCols.length; j++){
-	            var keyVal = rowCols[j].split(':');
-	            rowObj[keyVal[0].trim()] = keyVal[1].trim();
-	        }
-	        rows.push(rowObj);
-
-	        searchAndIncrementOrAdd(rowObj.leadsource);
-	    }
-	    
-	    var raw = document.createElement('p');
-	    raw.innerText = JSON.stringify(rows);
-	    document.body.appendChild(raw);
-
-
-
-	    console.log(leadsources);
-	}
-
-	$(document).ready(function(){
-	    
-	    $.ajax({
-	        url:JSONURL,
-	        success: function(data){
-	            callback(data);
-	        }
-	    });
-
-	});
-
-	</script>
 
 </body>
 </html>
