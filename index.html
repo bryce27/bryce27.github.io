@@ -26,6 +26,7 @@
 
 	function addLeadSource(nameKey){
     	leadsources.push({name: nameKey, count: 1});
+    	xaxis.push(nameKey);
 	}
 
 	function searchAndIncrementOrAdd(nameKey){
@@ -36,7 +37,6 @@
 	        }
 	    }
 	    addLeadSource(nameKey);
-	    xaxis.push(nameKey);
 	}
 
 	function callback(data){
@@ -78,10 +78,10 @@
 	var myChart = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	        labels: xaxis,
+	        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
 	        datasets: [{
 	            label: '# of Votes',
-	            data: [12, 19, 3],
+	            data: [12, 19, 3, 5, 2, 3],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',
