@@ -8,14 +8,14 @@
 </head>
 <body>
 
-	<h2 style="margin: auto">Property Solutions Team Scoreboard</h2>
+	<h2 style="text-align: center">Property Solutions Team Scoreboard</h2>
 
 	<div style="max-width: 500px; margin: auto">
 		<canvas id="myChart" width="200" height="200"></canvas>
 	</div>
 
-	<div style="max-width: 500px; margin: auto">
-		<canvas id="myPieChart" width="200" height="200"></canvas>
+	<div style="max-width: 100px; margin: auto">
+		<canvas id="myPieChart" width="100" height="100"></canvas>
 	</div>
 
 	<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSea6a1NKX9cWEuB-HPmfiwG_lYa-OqeB26G_7HTKXTqIEpo6Q/viewform">Submit a lead</a></p>
@@ -27,6 +27,8 @@
 	var leadsources = [];
 	var xaxis = [];
 	var counts = [];
+	var vacantCount = 0;
+	var distressedCount = 0;
 
 	function getCount(nameKey){
 	    for (var i=0; i < leadsources.length; i++) {
@@ -77,12 +79,17 @@
 	        compare.setDate(compare.getDate() - dayNumber);
 
 	        console.log('the day is', compare.getDay())
-
 	        console.log('timestamp', rowObj.timestamp);
 
 	        if (d > compare){
 	        	console.log('is less', d);
 	        	searchAndIncrementOrAdd(rowObj.leadsource);
+	        	if (rowObj.vacantdistressed == 'V'){
+	        		vacantCount++;
+	        	}
+	        	else {
+	        		distressedCount++;
+	        	}
 	        }
 	        
 	    }
@@ -136,22 +143,19 @@
 
 		var pie_data = {
 		    labels: [
-		        "Red",
-		        "Blue",
-		        "Yellow"
+		        "Vacant",
+		        "Distressed"
 		    ],
 		    datasets: [
 		        {
-		            data: [300, 50, 100],
+		            data: [vacantCount, distressedCount],
 		            backgroundColor: [
 		                "#FF6384",
-		                "#36A2EB",
-		                "#FFCE56"
+		                "#36A2EB"
 		            ],
 		            hoverBackgroundColor: [
 		                "#FF6384",
-		                "#36A2EB",
-		                "#FFCE56"
+		                "#36A2EB"
 		            ]
 		        }]
 		};
