@@ -4,14 +4,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.6/Chart.bundle.min.js"></script>
 
-	<title>Hey</title>
+	<title>Property Solutions Team</title>
 </head>
 <body>
-	<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSea6a1NKX9cWEuB-HPmfiwG_lYa-OqeB26G_7HTKXTqIEpo6Q/viewform">Enter more data.</a></p>
 
-	<div style="max-width: 500px">
+	<h2>Property Solutions Team Scoreboard</h2>
+
+	<div style="max-width: 500px; margin: auto">
 		<canvas id="myChart" width="200" height="200"></canvas>
 	</div>
+
+	<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSea6a1NKX9cWEuB-HPmfiwG_lYa-OqeB26G_7HTKXTqIEpo6Q/viewform">Submit a lead</a></p>
 
 	<script>
 
@@ -80,9 +83,9 @@
 	        
 	    }
 	    
-	    var raw = document.createElement('p');
-	    raw.innerText = JSON.stringify(rows);
-	    document.body.appendChild(raw);
+	    // var raw = document.createElement('p');
+	    // raw.innerText = JSON.stringify(rows);
+	    // document.body.appendChild(raw);
 
 	    console.log(leadsources);
 	    getCounts();
