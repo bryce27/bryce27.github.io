@@ -8,7 +8,7 @@
 </head>
 <body>
 
-	<h2>Property Solutions Team Scoreboard</h2>
+	<h2 style="margin: auto">Property Solutions Team Scoreboard</h2>
 
 	<div style="max-width: 500px; margin: auto">
 		<canvas id="myChart" width="200" height="200"></canvas>
@@ -128,6 +128,33 @@
 		            }]
 		        }
 		    }
+		});
+
+		var pie_data = {
+		    labels: [
+		        "Red",
+		        "Blue",
+		        "Yellow"
+		    ],
+		    datasets: [
+		        {
+		            data: [300, 50, 100],
+		            backgroundColor: [
+		                "#FF6384",
+		                "#36A2EB",
+		                "#FFCE56"
+		            ],
+		            hoverBackgroundColor: [
+		                "#FF6384",
+		                "#36A2EB",
+		                "#FFCE56"
+		            ]
+		        }]
+		};
+
+		var myPieChart = new Chart(ctx,{
+		    type: 'pie',
+		    data: pie_data
 		});
 	}
 
