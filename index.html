@@ -28,6 +28,14 @@
 	    }
 	}
 
+	function getCounts(){
+		var counts = [];
+		for (var i=0; i < xaxis.length; i++) {
+	        counts.push(getCount(xaxis[i]));
+	    }
+	    return counts;
+	}
+
 	function addLeadSource(nameKey){
     	leadsources.push({name: nameKey, count: 1});
     	xaxis.push(nameKey);
@@ -73,7 +81,7 @@
 		        labels: xaxis,
 		        datasets: [{
 		            label: '# of Votes',
-		            data: [12, 19, 3],
+		            data: counts,
 		            backgroundColor: [
 		                'rgba(255, 99, 132, 0.2)',
 		                'rgba(54, 162, 235, 0.2)',
