@@ -18,13 +18,11 @@
 	var leadsources = [];
 
 	function addLeadSource(nameKey){
-        if ( !search(nameKey) ){
-        	obj = {
-        		name: nameKey,
-        		count: 1
-        	}
-        	leadsources.push(obj);
-	    }
+    	obj = {
+    		name: nameKey,
+    		count: 1
+    	}
+    	leadsources.push(obj);
 	}
 
 	function searchAndIncrementOrAdd(nameKey){
