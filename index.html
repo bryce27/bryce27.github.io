@@ -17,20 +17,24 @@
 
 	var leadsources = [];
 
-	function incrementCount(nameKey, myArray){
-	    for (var i=0; i < myArray.length; i++) {
-	        if (myArray[i].name === nameKey) {
-	            return myArray[i].count;
-	        }
-	        else {
-	        	obj = {
-	        		name: nameKey,
-	        		count: 1
-	        	}
-	        	myArray.push(obj);
-	        	return obj.count;
+	function addLeadSource(nameKey){
+        if ( !search(nameKey) ){
+        	obj = {
+        		name: nameKey,
+        		count: 1
+        	}
+        	leadsources.push(obj);
+	    }
+	}
+
+	function searchAndIncrementOrAdd(nameKey){
+	    for (var i=0; i < leadsources.length; i++) {
+	        if (leadsources[i].name === nameKey) {
+	        	leadsources[i].count++;
+	            return true;
 	        }
 	    }
+	    addLeadSource(nameKey);
 	}
 
 	function callback(data){
@@ -47,7 +51,7 @@
 	        }
 	        rows.push(rowObj);
 
-	        incrementCount(rowObj.leadsource, leadsources)
+	        searchAndIncrementOrAdd(rowObj.leadsource);
 	    }
 	    
 	    var raw = document.createElement('p');
