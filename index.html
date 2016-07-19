@@ -1,8 +1,6 @@
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="http://metricsgraphicsjs.org/css/metricsgraphics.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<script src="http://kovalent.co/mksht/dollaraday/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js"></script>
 
 	<title>Hey</title>
@@ -17,6 +15,24 @@
 
 	var JSONURL = 'https://spreadsheets.google.com/feeds/list/1CVtxktOSZxUmDCR8zEdGA5xEdNpB2sK2MtSXC-JIdOU/1/public/basic?alt=json';
 
+	var leadsources = [];
+
+	function incrementCount(nameKey, myArray){
+	    for (var i=0; i < myArray.length; i++) {
+	        if (myArray[i].name === nameKey) {
+	            return myArray[i].count;
+	        }
+	        else {
+	        	obj = {
+	        		name: nameKey,
+	        		count: 1
+	        	}
+	        	myArray.push(obj);
+	        	return obj.count;
+	        }
+	    }
+	}
+
 	function callback(data){
 	    var rows = [];
 	    var cells = data.feed.entry;
@@ -30,12 +46,15 @@
 	            rowObj[keyVal[0].trim()] = keyVal[1].trim();
 	        }
 	        rows.push(rowObj);
-	        console.log(rowObj.leadsource)
+
+	        incrementCount(rowObj.leadsource, leadsources)
 	    }
 	    
 	    var raw = document.createElement('p');
 	    raw.innerText = JSON.stringify(rows);
 	    document.body.appendChild(raw);
+
+	    document.body.appendChild(leadsources);
 	}
 
 	$(document).ready(function(){
