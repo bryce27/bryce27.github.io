@@ -64,8 +64,16 @@
 	        }
 	        rows.push(rowObj);
 
+	        var d = new Date(rowObj.timestamp);
+	        var compare = new Date('7/19/2016 1:11:55');
+
 	        console.log('timestamp', rowObj.timestamp);
-	        searchAndIncrementOrAdd(rowObj.leadsource);
+
+	        if (d < compare){
+	        	console.log('is less', d);
+	        	searchAndIncrementOrAdd(rowObj.leadsource);
+	        }
+	        
 	    }
 	    
 	    var raw = document.createElement('p');
