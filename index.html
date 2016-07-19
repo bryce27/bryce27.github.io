@@ -67,7 +67,7 @@
 	        var d = new Date(rowObj.timestamp);
 	        var compare = new Date();
 	        var dayNumber = compare.getDay();
-	        compare.setDate(compare - dayNumber);
+	        compare.setDate(compare.getDate() - dayNumber);
 
 	        console.log('the day is', compare.getDay())
 
