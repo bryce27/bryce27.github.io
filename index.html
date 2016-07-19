@@ -19,6 +19,7 @@
 
 	var leadsources = [];
 	var xaxis = [];
+	var counts = [];
 
 	function getCount(nameKey){
 	    for (var i=0; i < leadsources.length; i++) {
@@ -29,11 +30,9 @@
 	}
 
 	function getCounts(){
-		var counts = [];
 		for (var i=0; i < xaxis.length; i++) {
 	        counts.push(getCount(xaxis[i]));
 	    }
-	    return counts;
 	}
 
 	function addLeadSource(nameKey){
@@ -73,6 +72,7 @@
 	    document.body.appendChild(raw);
 
 	    console.log(leadsources);
+	    getCounts();
 
 	    var ctx = document.getElementById("myChart");
 		var myChart = new Chart(ctx, {
