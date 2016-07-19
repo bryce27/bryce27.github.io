@@ -4,7 +4,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	<script src="http://kovalent.co/mksht/dollaraday/js/bootstrap.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.3.0/metricsgraphics.js"></script>
 
 	<title>Hey</title>
 </head>
@@ -15,34 +14,8 @@
 	</div>
 
 	<script>
-	// $.ajax({
-	//   url:'https://spreadsheets.google.com/feeds/list/1CVtxktOSZxUmDCR8zEdGA5xEdNpB2sK2MtSXC-JIdOU/1/public/basic?alt=json-in-script&callback=JSON_CALLBACK',
-	//   success: function(data){
-	//     console.log(data);
-	//   }
-	// });
 
 	var JSONURL = 'https://spreadsheets.google.com/feeds/list/1CVtxktOSZxUmDCR8zEdGA5xEdNpB2sK2MtSXC-JIdOU/1/public/basic?alt=json';
-
-	function drawChart(rows){
-    
-	    console.log(rows);
-	    
-	    for (var i = 0; i < rows.length; i++){
-	        rows[i].timestamp = new Date(rows[i].timestamp);
-	    }
-	    
-	    MG.data_graphic({
-	      title: "Odometer Reading vs. Date",
-	      data: rows,
-	      width: 400,
-	      height: 250,
-	      target: "#chart",
-	      x_accessor: "timestamp",
-	      y_accessor: "odometer",
-	      interpolate: "monotone"
-	    });
-	}
 
 	function callback(data){
 	    var rows = [];
@@ -62,8 +35,6 @@
 	    var raw = document.createElement('p');
 	    raw.innerText = JSON.stringify(rows);
 	    document.body.appendChild(raw);
-
-	    drawChart(rows);
 	}
 
 	$(document).ready(function(){
