@@ -65,9 +65,10 @@
 	        rows.push(rowObj);
 
 	        var d = new Date(rowObj.timestamp);
-	        var compare = new Date('7/17/2016 1:11:55');
+	        var compare = new Date();
+	        var dayNumber = compare.getDay();
 
-	        console.log('17th was', compare.getDay())
+	        console.log('today is', dayNumber)
 
 	        console.log('timestamp', rowObj.timestamp);
 
