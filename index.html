@@ -14,6 +14,10 @@
 		<canvas id="myChart" width="200" height="200"></canvas>
 	</div>
 
+	<div style="max-width: 500px; margin: auto">
+		<canvas id="myPieChart" width="200" height="200"></canvas>
+	</div>
+
 	<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSea6a1NKX9cWEuB-HPmfiwG_lYa-OqeB26G_7HTKXTqIEpo6Q/viewform">Submit a lead</a></p>
 
 	<script>
@@ -152,7 +156,8 @@
 		        }]
 		};
 
-		var myPieChart = new Chart(ctx,{
+		var pie_ctx = document.getElementById("myPieChart");
+		var myPieChart = new Chart(pie_ctx,{
 		    type: 'pie',
 		    data: pie_data
 		});
