@@ -9,7 +9,9 @@
 <body>
 	<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSea6a1NKX9cWEuB-HPmfiwG_lYa-OqeB26G_7HTKXTqIEpo6Q/viewform">Enter more data.</a></p>
 
-	<canvas id="myChart" width="200" height="200"></canvas>
+	<div style="max-width: 500px">
+		<canvas id="myChart" width="200" height="200"></canvas>
+	</div>
 
 	<script>
 
@@ -80,10 +82,10 @@
 	var myChart = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
-	        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	        labels: xaxis,
 	        datasets: [{
 	            label: '# of Votes',
-	            data: [12, 19, 3, 5, 2, 3],
+	            data: [12, 19, 3],
 	            backgroundColor: [
 	                'rgba(255, 99, 132, 0.2)',
 	                'rgba(54, 162, 235, 0.2)',
